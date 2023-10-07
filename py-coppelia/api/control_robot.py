@@ -27,23 +27,32 @@ error_code,jointHandles[4]=sim.simxGetObjectHandle(clientID, '/Franka/link5_resp
 error_code,jointHandles[5]=sim.simxGetObjectHandle(clientID, '/Franka/link6_resp/joint' ,sim.simx_opmode_oneshot_wait)
 error_code,jointHandles[6]=sim.simxGetObjectHandle(clientID, '/Franka/link7_resp/joint' ,sim.simx_opmode_oneshot_wait)
 
+FrankaGripper =sim.simxGetObjectHandle(clientID, '/Franka/FrankaGripper' ,sim.simx_opmode_oneshot_wait)
 
 print("jointHandles: ", jointHandles) 
 
 #get and time simulation in ms
 print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
  
-
+"""
 while (sim.simxGetLastCmdTime(clientID)/1000)<100 : 
     for i in range(7):
         sim.simxSetJointTargetPosition(clientID, jointHandles[i], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
     print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
 
+"""
 
-#sim.simxSetJointTargetPosition(clientID, jointHandles[0], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
-#    sim.simxSetJointTargetPosition(clientID, jointHandles[1], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
-#   sim.simxSetJointTargetPosition(clientID, jointHandles[2], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
-#   print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
+
+while (sim.simxGetLastCmdTime(clientID)/1000)<100 :
+    first = sim.simxGetLastCmdTime(clientID)/1000
+    sim.simxSetJointTargetPosition(clientID, jointHandles[0], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    sim.simxSetJointTargetPosition(clientID, jointHandles[1], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    sim.simxSetJointTargetPosition(clientID, jointHandles[2], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
+    if (first == sim.simxGetLastCmdTime(clientID)/1000): 
+        sys.exit('Failed To connect.')
+    
+
 
 
 
