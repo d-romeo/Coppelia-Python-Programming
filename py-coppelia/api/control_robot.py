@@ -29,6 +29,8 @@ error_code,jointHandles[6]=sim.simxGetObjectHandle(clientID, '/Franka/link7_resp
 
 print(jointHandles) 
 
+#get and time simulation in ms
+print(sim.simxGetLastCmdTime(clientID)/1000)
 
 
 
