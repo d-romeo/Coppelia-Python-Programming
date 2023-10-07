@@ -36,11 +36,14 @@ print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
 
 while (sim.simxGetLastCmdTime(clientID)/1000)<100 : 
     for i in range(7):
-        sim.simxSetJointTargetPosition(clientID, jointHandles[i], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * pi/180,sim.simx_opmode_oneshot_wait)
-    
+        sim.simxSetJointTargetPosition(clientID, jointHandles[i], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
 
 
-
+#sim.simxSetJointTargetPosition(clientID, jointHandles[0], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+#    sim.simxSetJointTargetPosition(clientID, jointHandles[1], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+#   sim.simxSetJointTargetPosition(clientID, jointHandles[2], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+#   print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
 
 
 
