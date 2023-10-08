@@ -7,10 +7,11 @@ import numpy
 #definition of gripper operation, false -> close, true -> open
 
 def gripperOp(op): 
-    if op == (False):
-        sim.simxSetJointTargetVelocity(clientID,frankaGripper[1],-0.3, sim.simx_opmode_oneshot_wait)
-    if op == (True):
-        sim.simxSetJointTargetVelocity(clientID,frankaGripper[1], 0.3, sim.simx_opmode_oneshot_wait)
+    if op == False:
+        sim.simxSetJointTargetPosition(clientID,frankaGripper,0, sim.simx_opmode_oneshot_wait)
+    else:
+        if op == True:
+            sim.simxSetJointTargetPosition(clientID,frankaGripper, 1, sim.simx_opmode_oneshot_wait)
         
 
 
@@ -38,8 +39,8 @@ error_code,jointHandles[6]=sim.simxGetObjectHandle(clientID, '/Franka/link7_resp
 print("joint Handles: ", jointHandles) 
 
 # gripper handles
-frankaGripper =sim.simxGetObjectHandle(clientID, '/Franka/FrankaGripper/openCloseJoint' ,sim.simx_opmode_oneshot_wait)
-frankaCenterJoint = sim.simxGetObjectHandle(clientID, '/Franka/FrankaGripper/centerJoint' ,sim.simx_opmode_oneshot_wait)
+error_code,frankaGripper =sim.simxGetObjectHandle(clientID, '/Franka/FrankaGripper/openCloseJoint' ,sim.simx_opmode_oneshot_wait)
+error_code,frankaCenterJoint = sim.simxGetObjectHandle(clientID, '/Franka/FrankaGripper/centerJoint' ,sim.simx_opmode_oneshot_wait)
 print("gripper Handles: ", frankaGripper) 
 
 
@@ -60,10 +61,11 @@ while (sim.simxGetLastCmdTime(clientID)/1000)< 20 :
     sim.simxSetJointTargetPosition(clientID, jointHandles[0], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
     sim.simxSetJointTargetPosition(clientID, jointHandles[1], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
     sim.simxSetJointTargetPosition(clientID, jointHandles[2], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    sim.simxSetJointTargetPosition(clientID, jointHandles[4], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
+    
     print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
     if (first == sim.simxGetLastCmdTime(clientID)/1000): 
         sys.exit('Failed To connect. PLease restart the simulation.')
-        
 gripperOp(True)
 sys.exit('End')
 
