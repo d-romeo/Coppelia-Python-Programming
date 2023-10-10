@@ -5,7 +5,6 @@ import sys
 import numpy
 
 #definition of gripper operation, false -> close, true -> open
-
 def gripperOp(op): 
     if op == False:
         sim.simxSetJointTargetPosition(clientID,frankaGripper,0, sim.simx_opmode_oneshot_wait)
@@ -56,6 +55,11 @@ while (sim.simxGetLastCmdTime(clientID)/1000)<100 :
 
 
 gripperOp(False)
+
+dt = 0.001
+t_sim = 0
+
+"""
 while (sim.simxGetLastCmdTime(clientID)/1000)< 20 :
     first = sim.simxGetLastCmdTime(clientID)/1000
     sim.simxSetJointTargetPosition(clientID, jointHandles[0], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
@@ -68,6 +72,8 @@ while (sim.simxGetLastCmdTime(clientID)/1000)< 20 :
         sys.exit('Failed To connect. PLease restart the simulation.')
 gripperOp(True)
 sys.exit('End')
+"""
+
 
 
     
