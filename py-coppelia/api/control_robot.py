@@ -50,7 +50,6 @@ while (sim.simxGetLastCmdTime(clientID)/1000)<100 :
     for i in range(7):
         sim.simxSetJointTargetPosition(clientID, jointHandles[i], numpy.sin(sim.simxGetLastCmdTime(clientID)/1000) * numpy.pi/180,sim.simx_opmode_oneshot_wait)
     print("simulation time: ", sim.simxGetLastCmdTime(clientID)/1000)
-
 """
 
 
