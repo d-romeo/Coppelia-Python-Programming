@@ -6,7 +6,7 @@ from coppeliasim_zmqremoteapi_client import RemoteAPIClient
 from coppelia_utils import draw_trajectory,get_handles, get_joint_positions, get_pose, set_joint_target_positions ,get_object_position, create_drawing_object, clear_drawing_object, draw_point, set_object_position, set_object_pose
 from robotics_utils import forward_kinematics, inverse_kinematics, franka_dh_params
 
-def read_file (file_name: str, sheet_name: str, percentage: int) -> np.ndarray:  
+def read_file (file_name: str, sheet_name: str, percentage: int, back : bool) -> np.ndarray:  
     """
     percentage: percentage: percentage of the data to be used (0-100)
     """
@@ -29,9 +29,11 @@ def read_file (file_name: str, sheet_name: str, percentage: int) -> np.ndarray:
 
     q1 = np.clip(q1, np.deg2rad(q_limit[1]), None)
     q3 = np.clip(q3, np.deg2rad(q_limit[3]), None)
-
-
     Q = np.column_stack((q0, q1, q2, q3))
+
+    if back == True: 
+        Q = np.concatenate([Q, Q[-2::-1]], axis=0) 
+
     return Q
 
 def fake_trajectory() -> np.ndarray:
@@ -116,7 +118,7 @@ if __name__ == "__main__":
     taget_position = get_object_position(sim = sim, object_id = target_handle, respect_to = -1)
 
     # Read file
-    q = read_file (file_name=file_name, sheet_name=sheet_name, percentage=100)
+    q = read_file (file_name=file_name, sheet_name=sheet_name, percentage=40, back=True)
     len_q = q.shape[0]
     arm_trajecotry = []
     arm_poses = []
