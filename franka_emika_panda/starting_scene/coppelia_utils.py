@@ -61,3 +61,9 @@ def matrix_to_euler(sim, T:np.ndarray) -> Tuple[int, int, int]:
 
 def set_object_pose(sim, object_id:int, T:np.ndarray):
     sim.setObjectMatrix(object_id, T[0:3, 0:4].flatten().tolist())
+
+def draw_trajectory(sim, trajectory:np.ndarray):
+    max_points = 1000  
+    create_drawing_object(sim, max_points, size=5.0, color=[255, 0, 0])
+    for i in range(0, trajectory.shape[0]):
+        draw_point(sim, trajectory[i].tolist())
