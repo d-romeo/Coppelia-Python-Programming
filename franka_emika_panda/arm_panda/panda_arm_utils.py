@@ -6,7 +6,7 @@ from robotics_utils import inverse_kinematics
 
 """
     Utils for the robot-arm simulation on coppelia. Work only for this simulation.
-    Main: main_panda_arm  
+    Main: main_panda_arm.py
     Scene: panda_arm.ttt
 """
 
