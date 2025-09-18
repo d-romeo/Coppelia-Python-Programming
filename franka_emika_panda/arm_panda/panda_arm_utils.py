@@ -5,8 +5,9 @@ from coppelia_utils import set_object_position, set_object_pose, get_pose, get_j
 from robotics_utils import inverse_kinematics
 
 """
-    Utils for the robot-arm simulation on coppelia. Work only for this simulation. 
-    Scene: franka_scene.ttt
+    Utils for the robot-arm simulation on coppelia. Work only for this simulation.
+    Main: main_panda_arm  
+    Scene: panda_arm.ttt
 """
 
 braccio_dh_params = [   
