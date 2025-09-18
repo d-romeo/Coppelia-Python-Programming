@@ -1,4 +1,3 @@
-
 import numpy as np
 
 # DH parameters of the UR5 robot

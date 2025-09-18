@@ -3,7 +3,6 @@ from coppeliasim_zmqremoteapi_client import RemoteAPIClient
 from coppelia_utils import get_handles, get_joint_positions, get_pose, set_joint_target_positions, get_object_position
 from robotics_utils import forward_kinematics, inverse_kinematics, franka_dh_params, forward_kinematics_panda
 
-COPPELIA_SCENE_PATH =  "code\nikolas_ik\franka_scene.ttt" 
 if __name__ == "__main__":
     client = RemoteAPIClient()
     sim = client.require('sim') # This is the object that represents the simulation
